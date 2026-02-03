@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pakistan Studies Interactive Quiz</title>
+    <title>Advanced Pakistan Studies Quiz (Theory & Concepts)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -27,18 +27,18 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-slate-100 text-slate-800">
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <div>
-                <h1 class="text-xl font-bold text-green-700">Pakistan Studies Quiz</h1>
-                <p class="text-xs text-gray-500">Based on Constitutional, Ideological, and Economic lectures</p>
+                <h1 class="text-xl font-bold text-blue-400">Advanced Pakistan Studies</h1>
+                <p class="text-xs text-slate-400">Hard Mode: Theory, Analysis & Concepts</p>
             </div>
             <div class="text-right">
-                <span id="score-display" class="text-lg font-bold text-gray-900">0 / 0</span>
-                <p class="text-xs text-gray-500">Score</p>
+                <span id="score-display" class="text-lg font-bold text-white">0 / 0</span>
+                <p class="text-xs text-slate-400">Score</p>
             </div>
         </div>
     </header>
@@ -46,128 +46,121 @@
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-4 py-8">
         <!-- Progress Bar -->
-        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
-            <div id="progress-bar" class="bg-green-600 h-2.5 rounded-full" style="width: 0%"></div>
+        <div class="w-full bg-slate-300 rounded-full h-2.5 mb-6">
+            <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
         </div>
 
-        <!-- Filter/Jump to Section (Optional UI enhancement) -->
+        <!-- Filter Buttons -->
         <div class="mb-6 flex flex-wrap gap-2 justify-center">
-            <button onclick="filterQuestions('all')" class="px-3 py-1 text-sm rounded-full bg-gray-200 hover:bg-gray-300 focus:bg-green-600 focus:text-white transition active-filter">All</button>
-            <button onclick="filterQuestions('constitution')" class="px-3 py-1 text-sm rounded-full bg-gray-200 hover:bg-gray-300 focus:bg-green-600 focus:text-white transition">Constitution</button>
-            <button onclick="filterQuestions('ideology')" class="px-3 py-1 text-sm rounded-full bg-gray-200 hover:bg-gray-300 focus:bg-green-600 focus:text-white transition">Ideology</button>
-            <button onclick="filterQuestions('geography')" class="px-3 py-1 text-sm rounded-full bg-gray-200 hover:bg-gray-300 focus:bg-green-600 focus:text-white transition">Geography</button>
-            <button onclick="filterQuestions('politics')" class="px-3 py-1 text-sm rounded-full bg-gray-200 hover:bg-gray-300 focus:bg-green-600 focus:text-white transition">Politics</button>
-            <button onclick="filterQuestions('economy')" class="px-3 py-1 text-sm rounded-full bg-gray-200 hover:bg-gray-300 focus:bg-green-600 focus:text-white transition">Economy</button>
+            <button onclick="filterQuestions('all')" class="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-white border border-slate-300 hover:bg-slate-50 focus:bg-blue-600 focus:text-white focus:border-blue-600 transition active-filter">All</button>
+            <button onclick="filterQuestions('constitution_theory')" class="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-white border border-slate-300 hover:bg-slate-50 focus:bg-blue-600 focus:text-white focus:border-blue-600 transition">Const. Theory</button>
+            <button onclick="filterQuestions('ideology_theory')" class="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-white border border-slate-300 hover:bg-slate-50 focus:bg-blue-600 focus:text-white focus:border-blue-600 transition">Ideology Analysis</button>
+            <button onclick="filterQuestions('economic_theory')" class="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-white border border-slate-300 hover:bg-slate-50 focus:bg-blue-600 focus:text-white focus:border-blue-600 transition">Econ Concepts</button>
+            <button onclick="filterQuestions('political_dynamics')" class="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-white border border-slate-300 hover:bg-slate-50 focus:bg-blue-600 focus:text-white focus:border-blue-600 transition">Pol. Dynamics</button>
         </div>
 
         <!-- Quiz Container -->
         <div id="quiz-container" class="space-y-6">
-            <!-- Questions will be injected here by JS -->
+            <!-- Questions injected here -->
         </div>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t mt-12 py-6 text-center text-sm text-gray-500">
-        <p>Generated for Pakistan Studies Review</p>
+    <footer class="bg-white border-t mt-12 py-6 text-center text-sm text-slate-500">
+        <p>Advanced Module • Theory Based MCQs</p>
     </footer>
 
     <script>
-        // Data extracted from the provided files
         const quizData = [
-            // --- Constitutional Amendments ---
-            { id: 1, category: 'constitution', question: "In which year was the First Amendment to the Constitution of Pakistan passed?", options: ["1973", "1974", "1977", "1980"], answer: 1 },
-            { id: 2, category: 'constitution', question: "What was the primary impact of the First Amendment (1974)?", options: ["Restoration of democracy", "Defined Muslim and non-Muslim (Ahmadis)", "Dissolution of assemblies", "Creation of Shariat Courts"], answer: 1 },
-            { id: 3, category: 'constitution', question: "According to the provided text, when was the Seventh Amendment passed?", options: ["1977", "1985", "1986", "2010"], answer: 2 },
-            { id: 4, category: 'constitution', question: "The Seventh Amendment strengthened the powers of which two offices?", options: ["Prime Minister and Speaker", "President and Chief of Army Staff", "Chief Justice and President", "Governor and Chief Minister"], answer: 1 },
-            { id: 5, category: 'constitution', question: "Which amendment empowered the President to dissolve the National Assembly?", options: ["1st Amendment", "7th Amendment", "8th Amendment", "18th Amendment"], answer: 2 },
-            { id: 6, category: 'constitution', question: "The Eighth Amendment (1985) played a role in establishing which judicial body?", options: ["Supreme Court", "High Court", "Shariat Appellate Bench", "Anti-Terrorism Court"], answer: 2 },
-            { id: 7, category: 'constitution', question: "In which year was the Eighteenth Amendment passed?", options: ["2008", "2009", "2010", "2013"], answer: 2 },
-            { id: 8, category: 'constitution', question: "What was a key impact of the Eighteenth Amendment regarding legislative lists?", options: ["Created a new Federal List", "Abolished the Concurrent Legislative List", "Expanded the Concurrent Legislative List", "Merged Provincial and Federal Lists"], answer: 1 },
-            { id: 9, category: 'constitution', question: "The Eighteenth Amendment is known for shifting the system towards:", options: ["Presidential form of government", "Military rule", "Parliamentary system and provincial autonomy", "Centralized Unitary system"], answer: 2 },
-            { id: 10, category: 'constitution', question: "The 18th Amendment devolved significant powers to:", options: ["The President", "The Judiciary", "The Provinces", "The Local Government"], answer: 2 },
+            // --- Constitutional Theory (15) ---
+            { id: 81, category: 'constitution_theory', question: "The abolition of the 'Concurrent Legislative List' by the 18th Amendment theoretically signifies:", options: ["A shift towards a Unitary form of government", "A shift towards greater Provincial Autonomy and Federalism", "The establishment of a Presidential system", "The supremacy of the Judiciary over Parliament"], answer: 1 },
+            { id: 82, category: 'constitution_theory', question: "How did the 8th Amendment fundamentally alter the balance of power within the Executive branch?", options: ["It empowered the Prime Minister to dissolve the Senate", "It tilted power heavily towards the President, allowing dissolution of the National Assembly", "It removed the President's discretionary powers entirely", "It transferred executive authority to the Chief Justice"], answer: 1 },
+            { id: 83, category: 'constitution_theory', question: "The introduction of 'Islamic Law Benches' in the 7th Amendment represents an intertwining of:", options: ["The Executive and the Military", "Civil Law and Martial Law", "Legal and Religious matters", "Federal and Provincial jurisdictions"], answer: 2 },
+            { id: 84, category: 'constitution_theory', question: "The First Amendment (1974) is sociologically significant because it:", options: ["Redefined the boundaries of the state", "Instituted a new economic order", "Codified religious exclusion regarding the Ahmadiyya community", "Abolished the feudal system"], answer: 2 },
+            { id: 85, category: 'constitution_theory', question: "In the context of the 18th Amendment, 'Devolution of Powers' primarily refers to:", options: ["Transfer of power from Military to Civilian", "Transfer of legislative competence from the Centre to the Provinces", "Transfer of judicial power to the Shariat Court", "Transfer of administrative power to Local Bodies only"], answer: 1 },
+            { id: 86, category: 'constitution_theory', question: "The 'Restoration of the Parliamentary System' in the 18th Amendment was a direct reversal of the structural changes introduced by:", options: ["The 1st Amendment", "The 17th and 8th Amendments (Presidential Powers)", "The 1973 original text", "The Indian Act of 1935"], answer: 1 },
+            { id: 87, category: 'constitution_theory', question: "The 7th Amendment's strengthening of the Chief of Army Staff's powers theoretically contributed to:", options: ["The consolidation of Military Authority within the constitution", "The complete separation of Civil and Military spheres", "The supremacy of the Parliament", "The independence of the Judiciary"], answer: 0 },
+            { id: 88, category: 'constitution_theory', question: "Which legal mechanism was established by the 8th Amendment to integrate Islamic principles into the appellate legal system?", options: ["The Federal Shariat Court (Foundational)", "The Shariat Appellate Bench", "The Council of Islamic Ideology", "The Ministry of Religious Affairs"], answer: 1 },
+            { id: 89, category: 'constitution_theory', question: "Constitutional 'adaptation and reform' in Pakistan is described in the text as:", options: ["A static and rigid process", "A continuous process shaped by political and social dynamics", "A process driven solely by external pressure", "A completed historical event"], answer: 1 },
+            { id: 90, category: 'constitution_theory', question: "The impact of declaring a specific community non-Muslim in the 1st Amendment led to:", options: ["Increased religious harmony", "Increased discrimination and shifted religious dynamics", "Secularization of the state", "Economic sanctions"], answer: 1 },
+            { id: 91, category: 'constitution_theory', question: "The repeal of the Concurrent List aimed to clarify:", options: ["The distinction between Civil and Criminal law", "The distribution of legislative powers between Federation and Provinces", "The foreign policy of Pakistan", "The election process of the Prime Minister"], answer: 1 },
+            { id: 92, category: 'constitution_theory', question: "The 18th Amendment's approach to governance can be characterized as:", options: ["Authoritarian and Centralized", "Inclusive and Participatory", "Theocratic and Rigid", "Military-centric"], answer: 1 },
+            { id: 93, category: 'constitution_theory', question: "The 8th Amendment is often criticized by democrats because it:", options: ["Enhanced the Prime Minister's authority", "Undermined the supremacy of the directly elected National Assembly", "Abolished the Senate", "Removed Islam from the constitution"], answer: 1 },
+            { id: 94, category: 'constitution_theory', question: "The 7th Amendment's timing (1977 era, enacted 1986 context) suggests it was a tool for:", options: ["Democratization", "Legitimizing a specific regime's authority", "Economic liberalization", "Educational reform"], answer: 1 },
+            { id: 95, category: 'constitution_theory', question: "The 'intertwining of legal and religious matters' mentioned in the texts refers specifically to reforms introduced in:", options: ["The 1956 Constitution", "The 7th and 8th Amendments", "The 18th Amendment", "The 1962 Constitution"], answer: 1 },
 
-            // --- Ideology ---
-            { id: 11, category: 'ideology', question: "An ideology consists of a set of ideas and beliefs through which we:", options: ["Ignore the world", "Perceive the outside world and act", "Create conflicts", "Isolate ourselves"], answer: 1 },
-            { id: 12, category: 'ideology', question: "What is the fundamental basis of the Ideology of Pakistan?", options: ["Socialism", "Two-Nation Theory", "Secularism", "Capitalism"], answer: 1 },
-            { id: 13, category: 'ideology', question: "The Two-Nation Theory posits that Hindus and Muslims are:", options: ["One nation with different religions", "Two distinct nations", "Economically similar", "Culturally identical"], answer: 1 },
-            { id: 14, category: 'ideology', question: "According to the ideology of Pakistan, to whom does sovereignty belong?", options: ["The People", "The Parliament", "Allah", "The President"], answer: 2 },
-            { id: 15, category: 'ideology', question: "Which component of ideology emphasizes preserving language, dress, and traditions?", options: ["Economic Independence", "Cultural Identity", "Foreign Policy", "Political Power"], answer: 1 },
-            { id: 16, category: 'ideology', question: "The ideology of Pakistan emphasizes which form of governance?", options: ["Dictatorship", "Monarchy", "Democratic Principles", "Anarchy"], answer: 2 },
-            { id: 17, category: 'ideology', question: "What was the economic goal of the separate nation?", options: ["Dependence on foreign aid", "Economic self-sufficiency", "Feudalism", "Trade restrictions"], answer: 1 },
-            { id: 18, category: 'ideology', question: "Social Justice in the Pakistan ideology implies:", options: ["Equal rights and opportunities for all", "Rights only for the majority", "Class-based system", "No legal framework"], answer: 0 },
-            { id: 19, category: 'ideology', question: "A shared ideology fosters social cohesion by promoting:", options: ["Division", "Unity and belonging", "Conflict", "Isolation"], answer: 1 },
-            { id: 20, category: 'ideology', question: "Ideology helps define a nation's:", options: ["Borders only", "Identity and purpose", "Military strength", "Population count"], answer: 1 },
+            // --- Ideology Analysis (15) ---
+            { id: 96, category: 'ideology_theory', question: "The definition of ideology as 'conscious and unconscious ideas' implies that:", options: ["It is only written in books", "It influences behavior and perception even without active thought", "It is purely a dream state", "It has no impact on reality"], answer: 1 },
+            { id: 97, category: 'ideology_theory', question: "Which component of Pakistan's ideology acts as a 'Conflict Resolution' tool?", options: ["A well-defined ideology serving as a basis for consensus", "The military strength", "The economic disparity", "The geographic location"], answer: 0 },
+            { id: 98, category: 'ideology_theory', question: "The tension in 'Implementation of Ideology' regarding the Legal System is best described as:", options: ["A conflict between English Common Law and French Civil Law", "A conflict between Formal Legal Systems and Traditional Jirgas/Parallel systems", "A lack of judges", "Too many lawyers"], answer: 1 },
+            { id: 99, category: 'ideology_theory', question: "Economic implementation of ideology faces a contradiction between:", options: ["Islamic economic principles (Social Justice) and Modern Globalized Economy demands", "Agriculture and Industry", "Import and Export", "Public and Private sector"], answer: 0 },
+            { id: 100, category: 'ideology_theory', question: "The 'Two-Nation Theory' is fundamentally based on the premise that:", options: ["Hindus and Muslims are racially distinct", "Hindus and Muslims are distinct nations with separate cultural/religious identities", "India cannot be governed by the British", "Muslims are economically superior"], answer: 1 },
+            { id: 101, category: 'ideology_theory', question: "Ideology fostering 'Social Cohesion' achieves this by:", options: ["Enforcing strict laws", "Promoting a sense of unity, belonging, and shared values", "Eliminating all minorities", "Closing borders"], answer: 1 },
+            { id: 102, category: 'ideology_theory', question: "In the context of 'Foreign Relations', Pakistan's ideology dictates:", options: ["Total isolation", "Alignment only with the West", "An independent policy emphasizing Islamic principles and peaceful coexistence", "Aggression towards neighbors"], answer: 2 },
+            { id: 103, category: 'ideology_theory', question: "'Social Justice' in the ideology of Pakistan theoretically ensures:", options: ["The dominance of the elite", "Equal rights and opportunities regardless of background", "The suppression of dissent", "State ownership of all property"], answer: 1 },
+            { id: 104, category: 'ideology_theory', question: "The 'Educational Development' component of the ideology emphasizes:", options: ["Only secular education", "Only technical skills", "Intellectual and moral development, specifically Islamic education", "Foreign language proficiency"], answer: 2 },
+            { id: 105, category: 'ideology_theory', question: "The 'Sovereignty of Allah' implies that in Pakistan's political framework:", options: ["The Parliament is absolute", "The People are absolute", "Legislative authority is delegated and limited by Divine Law", "The Clergy has absolute power"], answer: 2 },
+            { id: 106, category: 'ideology_theory', question: "Implementation challenges in the 'Education System' are characterized by:", options: ["Too much funding", "Debates between religious education and modern curriculum", "Lack of students", "Over-emphasis on sports"], answer: 1 },
+            { id: 107, category: 'ideology_theory', question: "The 'Cultural Identity' component of ideology specifically seeks to preserve:", options: ["British colonial traditions", "Hindu cultural practices", "Language, dress, and traditions associated with Islamic heritage", "Western pop culture"], answer: 2 },
+            { id: 108, category: 'ideology_theory', question: "Ideology helps in 'Governance' by:", options: ["Replacing the constitution", "Providing a framework to align policies with core national values", "Eliminating the need for elections", "Creating bureaucracy"], answer: 1 },
+            { id: 109, category: 'ideology_theory', question: "The 'Unity of Muslims' component aims to overcome:", options: ["National boundaries", "Internal divisions and sectarianism", "Economic growth", "Technological advancement"], answer: 1 },
+            { id: 110, category: 'ideology_theory', question: "The 'Constitutional Framework' of Pakistan reflects ideology but has been destabilized by:", options: ["Too many amendments", "Struggles between civilian and military authorities", "Excessive democracy", "Lack of a constitution"], answer: 1 },
 
-            // --- Geography & Resources ---
-            { id: 21, category: 'geography', question: "What is the total area of Pakistan?", options: ["696,095 km²", "796,095 km²", "896,095 km²", "596,095 km²"], answer: 1 },
-            { id: 22, category: 'geography', question: "Which is the second-highest mountain peak on Earth located in Pakistan?", options: ["Mount Everest", "Nanga Parbat", "K2", "Tirich Mir"], answer: 2 },
-            { id: 23, category: 'geography', question: "The Karakoram range spans the borders of Pakistan, China, and:", options: ["Afghanistan", "India", "Iran", "Tajikistan"], answer: 1 },
-            { id: 24, category: 'geography', question: "Which mountain range is home to Mount Everest?", options: ["Karakoram", "Hindu Kush", "Himalayas", "Sulaiman"], answer: 2 },
-            { id: 25, category: 'geography', question: "The Hindu Kush range forms a natural boundary between:", options: ["Pakistan and India", "Central Asia and South Asia", "Sindh and Punjab", "Balochistan and Iran"], answer: 1 },
-            { id: 26, category: 'geography', question: "Which range runs parallel to the coastline of the Arabian Sea?", options: ["Sulaiman Range", "Salt Range", "Kirthar Range", "Safed Koh"], answer: 2 },
-            { id: 27, category: 'geography', question: "The Swat Valley is located in which province?", options: ["Punjab", "Balochistan", "Khyber Pakhtunkhwa", "Sindh"], answer: 2 },
-            { id: 28, category: 'geography', question: "Which valley is situated in the Gilgit-Baltistan region?", options: ["Neelum Valley", "Kaghan Valley", "Hunza Valley", "Swat Valley"], answer: 2 },
-            { id: 29, category: 'geography', question: "Which is the largest desert in Pakistan?", options: ["Cholistan", "Thal", "Kharan", "Thar"], answer: 3 },
-            { id: 30, category: 'geography', question: "The Cholistan Desert is located in:", options: ["Sindh", "Southern Punjab", "Balochistan", "Khyber Pakhtunkhwa"], answer: 1 },
-            { id: 31, category: 'geography', question: "Where is the Thal Desert situated?", options: ["Between Indus and Jhelum rivers in Punjab", "In Southeastern Sindh", "Near the Iranian border", "In Northern Areas"], answer: 0 },
-            { id: 32, category: 'geography', question: "The Kharan Desert is located in:", options: ["Punjab", "Sindh", "Balochistan", "Gilgit-Baltistan"], answer: 2 },
-            { id: 33, category: 'geography', question: "The Potwar Plateau is situated between which two rivers?", options: ["Indus and Jhelum", "Ravi and Sutlej", "Chenab and Ravi", "Kabul and Swat"], answer: 0 },
-            { id: 34, category: 'geography', question: "Which plateau extends over a vast area covering most of Balochistan province?", options: ["Potwar Plateau", "Deccan Plateau", "Balochistan Plateau", "Tibetan Plateau"], answer: 2 },
-            { id: 35, category: 'geography', question: "The Indus Plain is characterized by:", options: ["Rocky terrain", "Extensive alluvial plains", "Dense forests", "Glaciers"], answer: 1 },
-            { id: 36, category: 'geography', question: "Which of these is a renewable natural resource?", options: ["Coal", "Natural Gas", "Wind Energy", "Iron Ore"], answer: 2 },
-            { id: 37, category: 'geography', question: "Which of these is a non-renewable resource?", options: ["Solar Energy", "Fossil Fuels", "Water", "Forests"], answer: 1 },
-            { id: 38, category: 'geography', question: "The Khewra Mine is famous for:", options: ["Gold", "Copper", "Salt", "Coal"], answer: 2 },
-            { id: 39, category: 'geography', question: "Reko Diq in Balochistan is known for deposits of:", options: ["Iron and Steel", "Gold and Copper", "Salt and Gypsum", "Oil and Gas"], answer: 1 },
-            { id: 40, category: 'geography', question: "Alpine forests are found in:", options: ["Coastal areas", "Deserts", "Northern mountainous regions", "River banks"], answer: 2 },
+            // --- Economic Concepts (20) ---
+            { id: 111, category: 'economic_theory', question: "The fundamental difference between GDP and GNP is based on:", options: ["Production location vs. Ownership/Residence", "Goods vs. Services", "Private vs. Public sector", "Taxed vs. Non-taxed income"], answer: 0 },
+            { id: 112, category: 'economic_theory', question: "If a Pakistani citizen works in Saudi Arabia, their income is included in:", options: ["Pakistan's GDP", "Pakistan's GNP/GNI", "Both GDP and GNP", "Neither"], answer: 1 },
+            { id: 113, category: 'economic_theory', question: "If a Chinese company operates a factory in Lahore, the production value is included in:", options: ["Pakistan's GNP", "Pakistan's GDP", "China's GDP", "Neither"], answer: 1 },
+            { id: 114, category: 'economic_theory', question: "Gross National Income (GNI) is best defined as:", options: ["Total money earned by a nation's people and businesses, regardless of location", "Total value of goods produced within borders", "Total tax revenue collected", "Total exports minus imports"], answer: 0 },
+            { id: 115, category: 'economic_theory', question: "The 'Unemployment Rate' denominator is specifically:", options: ["The Total Population", "The Working Age Population", "The Labor Force (Employed + Unemployed)", "The Number of Employed People"], answer: 2 },
+            { id: 116, category: 'economic_theory', question: "The 'Labor Force Participation Rate' measures:", options: ["The percentage of people who have jobs", "The percentage of the working-age population that is active (working or seeking work)", "The percentage of the population that is retired", "The total number of jobs available"], answer: 1 },
+            { id: 117, category: 'economic_theory', question: "A 'Trade Deficit' occurs when:", options: ["Imports > Exports", "Exports > Imports", "GNP > GDP", "Tax Revenue > Expenditure"], answer: 0 },
+            { id: 118, category: 'economic_theory', question: "Sustainable Energy Practices are defined as managing resources to meet current needs without:", options: ["Reducing corporate profits", "Compromising the ability of future generations to meet their needs", "Using any non-renewable resources", "Stopping industrial growth"], answer: 1 },
+            { id: 119, category: 'economic_theory', question: "The goal of Sustainable Energy is to balance which three factors?", options: ["Profit, Loss, and Revenue", "Economic development, Environmental protection, and Social responsibility", "Solar, Wind, and Hydro", "Import, Export, and Consumption"], answer: 1 },
+            { id: 120, category: 'economic_theory', question: "Which of the following is considered a 'Renewable' resource due to natural replenishment?", options: ["Natural Gas (ancient remains)", "Iron Ore (crust deposits)", "Fisheries (reproduction)", "Coal (fossilized plants)"], answer: 2 },
+            { id: 121, category: 'economic_theory', question: "Productive vs. Protective Forests: 'Protective' forests primarily serve to:", options: ["Provide timber for commerce", "Protect soil and maintain ecological balance", "Provide firewood for locals", "Generate export revenue"], answer: 1 },
+            { id: 122, category: 'economic_theory', question: "The 'concurrent legislative list' abolition in the 18th Amendment had a direct impact on:", options: ["The collection of income tax", "The distribution of economic planning powers to provinces", "The printing of currency", "The foreign exchange rate"], answer: 1 },
+            { id: 123, category: 'economic_theory', question: "E-commerce and Digital Trade influence traditional trade by:", options: ["Increasing physical barriers", "Reducing the need for internet", "Altering supply chains and market access", "Eliminating all taxes"], answer: 2 },
+            { id: 124, category: 'economic_theory', question: "Pakistan's energy dependence on imports creates a vulnerability in:", options: ["Foreign Relations and Balance of Trade", "Cultural identity", "Linguistic unity", "Educational standards"], answer: 0 },
+            { id: 125, category: 'economic_theory', question: "The 'Participation Rate' formula is:", options: ["(Employed / Population) * 100", "(Labor Force / Working Age Non-Institutionalized Population) * 100", "(Unemployed / Employed) * 100", "(GDP / Population) * 100"], answer: 1 },
+            { id: 126, category: 'economic_theory', question: "Which forest type typically consists of drought-resistant shrubs and is found in arid conditions?", options: ["Alpine Forests", "Riverine Forests", "Sub-Tropical Scrub Forests", "Coniferous Forests"], answer: 2 },
+            { id: 127, category: 'economic_theory', question: "Iron Ore, Copper, and Gold are classified as:", options: ["Renewable Energy Sources", "Non-Renewable Minerals", "Agricultural Products", "Forest Products"], answer: 1 },
+            { id: 128, category: 'economic_theory', question: "The 'Indus Plain' is economically significant primarily because of its:", options: ["Mineral deposits", "Extensive alluvial plains supporting agriculture", "High altitude tourism", "Dense tropical rainforests"], answer: 1 },
+            { id: 129, category: 'economic_theory', question: "Aquifers are associated with which resource?", options: ["Surface water (Rivers)", "Groundwater", "Glacial melt", "Rainwater harvesting"], answer: 1 },
+            { id: 130, category: 'economic_theory', question: "Biomass sources for energy include:", options: ["Uranium and Plutonium", "Agricultural crops, sewage, and animal residues", "Wind and Solar", "Natural Gas and Oil"], answer: 1 },
 
-            // --- Climatic Zones ---
-            { id: 41, category: 'geography', question: "Which zone is characterized by a hot and humid climate in the Indus Delta?", options: ["Arid Zone", "Tropical Zone", "Temperate Zone", "Alpine Zone"], answer: 1 },
-            { id: 42, category: 'geography', question: "Which climatic zone includes the Thar Desert and Balochistan?", options: ["Coastal Zone", "Arid and Semi-Arid Zone", "Tropical Zone", "Temperate Zone"], answer: 1 },
-            { id: 43, category: 'geography', question: "The Northern Areas and Gilgit-Baltistan fall under which climatic zone?", options: ["Tropical Zone", "Arid Zone", "Temperate Zone", "Coastal Zone"], answer: 2 },
-            { id: 44, category: 'geography', question: "The Coastal Zone experiences the influence of:", options: ["Heavy Snowfall", "Sea breezes", "Glaciers", "Extreme dry heat"], answer: 1 },
-            { id: 45, category: 'geography', question: "Which zone features heavy snowfall and high peaks like K2?", options: ["Mountainous Zone (Himalayan)", "Tropical Zone", "Arid Zone", "Coastal Zone"], answer: 0 },
+            // --- Political Dynamics & Geography (15) ---
+            { id: 131, category: 'political_dynamics', question: "The 'Erosion of Institutions' under Martial Law specifically refers to:", options: ["Physical destruction of buildings", "Weakening of judiciary, media, and civil society", "Reduction in military spending", "Decrease in population"], answer: 1 },
+            { id: 132, category: 'political_dynamics', question: "Martial Law's effect on 'Social Division' is described as:", options: ["Creating a unified nation", "Polarization between pro-military and anti-military factions", "Removing class distinctions", "Enhancing religious harmony"], answer: 1 },
+            { id: 133, category: 'political_dynamics', question: "The 1970 elections are historically pivotal because they:", options: ["Solidified West Pakistan's control", "Led to the independence of Bangladesh", "Were the first non-party elections", "Resulted in a military victory"], answer: 1 },
+            { id: 134, category: 'political_dynamics', question: "The 'Sub-Tropical Highland Zone' is characterized by:", options: ["Hot summers and mild winters", "Moderate temperatures due to elevation and winter snowfall", "Arid desert conditions", "Humid coastal weather"], answer: 1 },
+            { id: 135, category: 'political_dynamics', question: "Which geographic feature acts as a natural boundary between Central Asia and South Asia?", options: ["The Indus River", "The Hindu Kush Range", "The Thar Desert", "The Potwar Plateau"], answer: 1 },
+            { id: 136, category: 'political_dynamics', question: "The 'Potwar Plateau' is distinct from the 'Balochistan Plateau' in that Potwar is:", options: ["Located in the southwest", "Located in the northeast between Indus and Jhelum", "A low-lying coastal area", "A vast desert"], answer: 1 },
+            { id: 137, category: 'political_dynamics', question: "Tropical Thorn Forests are 'xerophytic', meaning they are adapted to:", options: ["High altitude", "Waterlogged soil", "Hot and dry conditions", "Freezing temperatures"], answer: 2 },
+            { id: 138, category: 'political_dynamics', question: "The 'Coastal Zone' climate is moderated by:", options: ["Monsoon rains", "Sea breezes", "Alpine winds", "Desert heat"], answer: 1 },
+            { id: 139, category: 'political_dynamics', question: "Riverine Forests differ from other types because they:", options: ["Relly on rainfall", "Rely on river ecosystems and banks", "Grow only on mountains", "Are found in deserts"], answer: 1 },
+            { id: 140, category: 'political_dynamics', question: "The 'Temperate Zone' (Northern Areas) features:", options: ["Hot humid summers", "Cool summers and cold winters", "Year-round rain", "No snowfall"], answer: 1 },
+            { id: 141, category: 'political_dynamics', question: "Democracy is theoretically defined as a system where power is:", options: ["Seized by force", "Vested in the people", "Inherited by birth", "Granted by foreign powers"], answer: 1 },
+            { id: 142, category: 'political_dynamics', question: "Martial Law leads to 'International Isolation' primarily because:", options: ["It closes all airports", "International bodies condemn the suspension of democracy/rights", "It increases trade tariffs", "It stops tourism"], answer: 1 },
+            { id: 143, category: 'political_dynamics', question: "The 1988-1999 democratic period was characterized by:", options: ["Stable 5-year terms", "Political instability and alternating power between PPP and PML-N", "Single-party rule", "Military direct rule"], answer: 1 },
+            { id: 144, category: 'political_dynamics', question: "General Ayub Khan's justification for the 1958 Martial Law was:", options: ["External aggression", "Civilian incompetence and corruption", "Religious duty", "Economic surplus"], answer: 1 },
+            { id: 145, category: 'political_dynamics', question: "The 'Concurrent Legislative List' allowed:", options: ["Only provinces to make laws", "Only the federal government to make laws", "Both Federal and Provincial governments to make laws", "The military to make laws"], answer: 2 },
 
-            // --- Political Dynamics ---
-            { id: 46, category: 'politics', question: "When were the first democratic elections held in Pakistan?", options: ["1947", "1956", "1970", "1988"], answer: 2 },
-            { id: 47, category: 'politics', question: "Who became the first democratically elected Prime Minister after 1971?", options: ["Nawaz Sharif", "Benazir Bhutto", "Zulfikar Ali Bhutto", "Ayub Khan"], answer: 2 },
-            { id: 48, category: 'politics', question: "Who imposed the first Martial Law in Pakistan in 1958?", options: ["General Yahya Khan", "General Ayub Khan", "General Zia-ul-Haq", "General Musharraf"], answer: 1 },
-            { id: 49, category: 'politics', question: "Who imposed Martial Law in 1977?", options: ["General Ayub Khan", "General Zia-ul-Haq", "General Yahya Khan", "General Musharraf"], answer: 1 },
-            { id: 50, category: 'politics', question: "Which government was the first democratically elected civilian government to complete a full 5-year term?", options: ["PPP (2008-2013)", "PML-N (1997-1999)", "PML-N (2013-2018)", "PTI (2018-2022)"], answer: 0 },
-            { id: 51, category: 'politics', question: "Who took power in the 1999 coup?", options: ["General Zia-ul-Haq", "General Pervez Musharraf", "General Raheel Sharif", "General Bajwa"], answer: 1 },
-            { id: 52, category: 'politics', question: "Which party won the majority in the 2013 general elections?", options: ["PPP", "PTI", "PML-N", "ANP"], answer: 2 },
-            { id: 53, category: 'politics', question: "Who became Prime Minister after the 2018 elections?", options: ["Nawaz Sharif", "Imran Khan", "Asif Ali Zardari", "Shehbaz Sharif"], answer: 1 },
-            { id: 54, category: 'politics', question: "Martial Law often results in the suspension of:", options: ["Taxes", "Civil liberties and fundamental rights", "Military training", "Exports"], answer: 1 },
-            { id: 55, category: 'politics', question: "The era of 1988-1999 was characterized by alternating power between which two leaders?", options: ["Ayub Khan and Yahya Khan", "Benazir Bhutto and Nawaz Sharif", "Zardari and Gilani", "Musharraf and Chaudhry Shujaat"], answer: 1 },
-            { id: 56, category: 'politics', question: "Democracy is best described as:", options: ["Rule by the military", "Rule by the few", "Power vested in the people", "Rule by a monarch"], answer: 2 },
-            { id: 57, category: 'politics', question: "General Yahya Khan took over power in which year?", options: ["1958", "1969", "1971", "1977"], answer: 1 },
-            { id: 58, category: 'politics', question: "One effect of martial law mentioned is:", options: ["Increased foreign investment", "Lack of accountability", "Stronger democratic institutions", "Rapid social development"], answer: 1 },
-            { id: 59, category: 'politics', question: "The 1970 elections led to the independence of:", options: ["Kashmir", "Bangladesh", "Punjab", "Balochistan"], answer: 1 },
-            { id: 60, category: 'politics', question: "Which party formed the government in 2008?", options: ["PML-N", "PTI", "PPP", "MQM"], answer: 2 },
-
-            // --- Foreign Policy ---
-            { id: 61, category: 'politics', question: "Foreign policy refers to strategies a government uses to:", options: ["Manage internal taxes", "Interact with other countries", "Control local police", "Build domestic schools"], answer: 1 },
-            { id: 62, category: 'politics', question: "Which of the following is a tool of foreign policy?", options: ["Diplomacy", "Local Elections", "Provincial Budget", "City Planning"], answer: 0 },
-            { id: 63, category: 'politics', question: "Quaid-e-Azam outlined foreign policy goals in a broadcast to the USA in:", options: ["August 1947", "February 1948", "September 1948", "March 1949"], answer: 1 },
-            { id: 64, category: 'politics', question: "A central driver of Pakistan's security-oriented foreign policy is its relationship with:", options: ["Iran", "China", "India", "Sri Lanka"], answer: 2 },
-            { id: 65, category: 'politics', question: "The relationship with China is often described as:", options: ["Transactional", "All-weather friendship", "Hostile", "Distant"], answer: 1 },
-            { id: 66, category: 'politics', question: "Pakistan's stance on Kashmir advocates for:", options: ["Military conquest", "Peaceful resolution and Kashmiri rights", "Ignoring the issue", "Accepting the status quo"], answer: 1 },
-            { id: 67, category: 'politics', question: "Which project highlights the depth of China-Pakistan relations?", options: ["SAARC", "ECO", "CPEC", "NATO"], answer: 2 },
-            { id: 68, category: 'politics', question: "Who is the primary head of government shaping foreign policy?", options: ["The Chief Justice", "The Prime Minister", "The Governor", "The Speaker"], answer: 1 },
-            { id: 69, category: 'politics', question: "Pakistan's nuclear policy emphasizes:", options: ["Aggression", "Credible nuclear deterrent", "Disarmament", "Exporting technology"], answer: 1 },
-            { id: 70, category: 'politics', question: "Quaid-e-Azam believed in which principle regarding other nations?", options: ["Aggression", "Isolation", "Peaceful Coexistence", "Colonialism"], answer: 2 },
-
-            // --- Economy ---
-            { id: 71, category: 'economy', question: "GDP stands for:", options: ["Gross Domestic Profit", "Gross Domestic Product", "General Domestic Product", "Government Domestic Policy"], answer: 1 },
-            { id: 72, category: 'economy', question: "GNP stands for:", options: ["Gross National Product", "General National Profit", "Gross Net Profit", "Government National Policy"], answer: 0 },
-            { id: 73, category: 'economy', question: "The difference between GNP and GDP is that GNP includes:", options: ["Only domestic production", "Income earned by residents abroad", "Government taxes", "Black market economy"], answer: 1 },
-            { id: 74, category: 'economy', question: "GNI stands for:", options: ["Gross National Investment", "Gross National Income", "General Net Income", "Global National Interest"], answer: 1 },
-            { id: 75, category: 'economy', question: "The Unemployment Rate is calculated as:", options: ["(Employed / Labor Force) * 100", "(Unemployed / Labor Force) * 100", "(Labor Force / Population) * 100", "(Unemployed / Population) * 100"], answer: 1 },
-            { id: 76, category: 'economy', question: "Balance of Trade is the difference between:", options: ["Exports and Imports", "Income and Expenditure", "Taxes and Subsidies", "Assets and Liabilities"], answer: 0 },
-            { id: 77, category: 'economy', question: "Sustainable energy practices aim to meet current needs without:", options: ["Spending money", "Using technology", "Compromising future generations", "Using labor"], answer: 2 },
-            { id: 78, category: 'economy', question: "Labor Force Participation Rate estimates:", options: ["Total population", "Economy's active workforce", "Number of students", "Retired individuals"], answer: 1 },
-            { id: 79, category: 'economy', question: "A renewable resource mentioned in the economy lecture is:", options: ["Wind Energy", "Natural Gas", "Coal", "Oil"], answer: 0 },
-            { id: 80, category: 'economy', question: "If exports are greater than imports, it usually results in a:", options: ["Trade Deficit", "Trade Surplus", "Budget Deficit", "Inflation"], answer: 1 }
+            // --- Foreign Policy & Strategy (15) ---
+            { id: 146, category: 'political_dynamics', question: "Foreign Policy is driven by 'National Interests', which include:", options: ["Personal wealth of leaders", "Sovereignty, Security, and Economic Prosperity", "Expansion of borders", "Global domination"], answer: 1 },
+            { id: 147, category: 'political_dynamics', question: "'Soft Power' as a tool of foreign policy relies on:", options: ["Military coercion", "Economic sanctions", "Cultural exports, values, and diplomacy", "Nuclear deterrence"], answer: 2 },
+            { id: 148, category: 'political_dynamics', question: "Quaid-e-Azam's foreign policy statement 'Friendliness towards all' implies a stance of:", options: ["Aggressive expansion", "Isolationism", "Peaceful coexistence and non-aggression", "Colonial subservience"], answer: 2 },
+            { id: 149, category: 'political_dynamics', question: "A key 'Determinant' of foreign policy classified as 'External' would be:", options: ["National Ideology", "Global Power Dynamics", "Political Leadership", "Economic Resources"], answer: 1 },
+            { id: 150, category: 'political_dynamics', question: "Pakistan's 'Balancing Act' in foreign policy refers to navigating relations between:", options: ["The Army and the Navy", "Rural and Urban areas", "Major global powers (e.g., USA, China, Russia)", "Imports and Exports"], answer: 2 },
+            { id: 151, category: 'political_dynamics', question: "The 'All-Weather Friendship' refers to the strategic alliance with:", options: ["USA", "Saudi Arabia", "China", "Turkey"], answer: 2 },
+            { id: 152, category: 'political_dynamics', question: "Diplomacy is defined as:", options: ["The use of force", "Negotiating and maintaining relationships to advance interests", "Spying on other nations", "Closing embassies"], answer: 1 },
+            { id: 153, category: 'political_dynamics', question: "Economic constraints limit foreign policy by reducing:", options: ["Diplomatic Leverage", "The number of diplomats", "The size of the country", "The national language"], answer: 0 },
+            { id: 154, category: 'political_dynamics', question: "The 'Nuclear Policy' of Pakistan is primarily aimed at:", options: ["First strike capability", "Credible Minimum Deterrence", "Exporting weapons", "Energy monopoly"], answer: 1 },
+            { id: 155, category: 'political_dynamics', question: "Challenges to foreign policy from 'Non-State Actors' refers to:", options: ["International NGOs", "Terrorism and Extremism", "Multinational Corporations", "Tourists"], answer: 1 },
+            { id: 156, category: 'political_dynamics', question: "The 'Kashmir Dispute' is a core driver of foreign policy due to:", options: ["Economic trade only", "Security concerns and ideological commitment", "Climate change", "Cultural tourism"], answer: 1 },
+            { id: 157, category: 'political_dynamics', question: "'Public Diplomacy' involves engaging with:", options: ["Foreign governments only", "Foreign publics to shape image", "Local voters", "Military generals"], answer: 1 },
+            { id: 158, category: 'political_dynamics', question: "Quaid-e-Azam supported 'Decolonization', which means:", options: ["Supporting colonial powers", "Supporting the right of nations to self-determination", "Staying neutral in all wars", "Merging with other nations"], answer: 1 },
+            { id: 159, category: 'political_dynamics', question: "Energy Security affects foreign policy by necessitating:", options: ["Diversification of energy sources and international agreements", "Cutting off all energy use", "Burning local wood", "Ignoring global markets"], answer: 0 },
+            { id: 160, category: 'political_dynamics', question: "The 'Ministry of Foreign Affairs' is the central institution for:", options: ["Making laws", "Implementing foreign policy", "Collecting taxes", "Defending borders militarily"], answer: 1 },
         ];
 
         let score = 0;
@@ -183,43 +176,46 @@
                 : quizData.filter(q => q.category === filter);
 
             if (filteredData.length === 0) {
-                container.innerHTML = '<p class="text-center text-gray-500">No questions found for this category.</p>';
+                container.innerHTML = '<div class="p-8 text-center bg-white rounded-lg shadow"><p class="text-slate-500 text-lg">Select a category to begin.</p></div>';
                 return;
             }
 
             filteredData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'bg-white rounded-lg shadow-sm border border-gray-200 p-6 question-card';
-                card.id = `card-${item.id}`;
-
-                // Question Text
+                card.className = 'bg-white rounded-xl shadow-sm border border-slate-200 p-6 transition hover:shadow-md';
+                
+                // Question Title
                 const qTitle = document.createElement('h3');
-                qTitle.className = 'text-lg font-semibold text-gray-800 mb-4';
+                qTitle.className = 'text-lg font-bold text-slate-800 mb-2';
                 qTitle.textContent = `${item.id}. ${item.question}`;
+                
+                // Category Tag
+                const catTag = document.createElement('span');
+                catTag.className = 'inline-block px-2 py-1 mb-4 text-xs font-semibold text-blue-600 bg-blue-50 rounded';
+                catTag.textContent = item.category.replace('_', ' ').toUpperCase();
+
+                card.appendChild(catTag);
                 card.appendChild(qTitle);
 
-                // Options Container
+                // Options
                 const optionsDiv = document.createElement('div');
-                optionsDiv.className = 'space-y-3 mb-6';
+                optionsDiv.className = 'space-y-3 mb-6 mt-4';
                 
                 item.options.forEach((opt, index) => {
-                    // Wrapper
                     const wrapper = document.createElement('div');
                     wrapper.className = 'relative';
 
-                    // Input (Radio)
                     const input = document.createElement('input');
                     input.type = 'radio';
                     input.name = `question-${item.id}`;
                     input.id = `q${item.id}-opt${index}`;
                     input.value = index;
-                    input.className = 'peer sr-only option-input'; // sr-only hides the default radio
+                    input.className = 'peer sr-only option-input';
                     input.onchange = () => enableButton(item.id);
 
-                    // Label (Custom styling)
                     const label = document.createElement('label');
                     label.htmlFor = `q${item.id}-opt${index}`;
-                    label.className = 'option-label block w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50 peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:text-blue-700';
+                    label.className = 'option-label flex items-center w-full p-4 bg-white border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:text-blue-700 font-medium text-sm';
                     label.textContent = opt;
 
                     wrapper.appendChild(input);
@@ -228,24 +224,24 @@
                 });
                 card.appendChild(optionsDiv);
 
-                // Actions Area
+                // Footer Actions
                 const actionDiv = document.createElement('div');
-                actionDiv.className = 'flex items-center justify-between mt-4';
+                actionDiv.className = 'flex items-center justify-end mt-4 pt-4 border-t border-slate-100';
 
                 const checkBtn = document.createElement('button');
                 checkBtn.id = `btn-${item.id}`;
-                checkBtn.textContent = 'Give Answer';
+                checkBtn.textContent = 'Check Answer';
                 checkBtn.disabled = true;
-                checkBtn.className = 'px-6 py-2 bg-gray-300 text-white rounded-md font-semibold transition cursor-not-allowed';
+                checkBtn.className = 'px-6 py-2.5 bg-slate-200 text-slate-400 rounded-lg font-semibold transition cursor-not-allowed';
                 checkBtn.onclick = () => checkAnswer(item.id, item.answer);
                 
                 actionDiv.appendChild(checkBtn);
                 card.appendChild(actionDiv);
 
-                // Feedback Area
+                // Feedback
                 const feedback = document.createElement('div');
                 feedback.id = `feedback-${item.id}`;
-                feedback.className = 'hidden mt-4 p-3 rounded-md text-sm font-semibold';
+                feedback.className = 'hidden mt-4 p-4 rounded-lg text-sm font-bold text-center';
                 card.appendChild(feedback);
 
                 container.appendChild(card);
@@ -254,16 +250,14 @@
 
         function enableButton(id) {
             const btn = document.getElementById(`btn-${id}`);
-            // Check if already answered (to prevent re-enabling after checking)
             if (!btn.classList.contains('hidden')) {
                 btn.disabled = false;
-                btn.classList.remove('bg-gray-300', 'cursor-not-allowed');
-                btn.classList.add('bg-blue-600', 'hover:bg-blue-700', 'cursor-pointer');
+                btn.classList.remove('bg-slate-200', 'text-slate-400', 'cursor-not-allowed');
+                btn.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'shadow-lg', 'shadow-blue-200');
             }
         }
 
         function checkAnswer(questionId, correctIndex) {
-            // Get selected option
             const selected = document.querySelector(`input[name="question-${questionId}"]:checked`);
             if (!selected) return;
 
@@ -271,33 +265,26 @@
             const btn = document.getElementById(`btn-${questionId}`);
             const feedback = document.getElementById(`feedback-${questionId}`);
             
-            // Disable inputs
+            // Lock inputs
             const inputs = document.querySelectorAll(`input[name="question-${questionId}"]`);
             inputs.forEach(input => input.disabled = true);
 
-            // Hide button
             btn.classList.add('hidden');
             feedback.classList.remove('hidden');
 
-            // Logic for coloring options
             const labels = document.querySelectorAll(`label[for^="q${questionId}-opt"]`);
-            
-            // Highlight Correct Answer Green
             labels[correctIndex].classList.add('correct-answer');
 
             if (selectedIndex === correctIndex) {
-                // Correct
                 score++;
-                feedback.textContent = "Correct! Well done.";
-                feedback.classList.add('bg-green-100', 'text-green-800');
+                feedback.textContent = "Correct! Excellent theoretical understanding.";
+                feedback.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-200');
             } else {
-                // Wrong - Highlight selected Red
                 labels[selectedIndex].classList.add('wrong-answer');
-                feedback.textContent = "Incorrect. The correct answer has been highlighted.";
-                feedback.classList.add('bg-red-100', 'text-red-800');
+                feedback.textContent = "Incorrect. Review the highlighted correct answer.";
+                feedback.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-200');
             }
 
-            // Update Stats
             answeredCount++;
             updateScore();
         }
@@ -309,15 +296,9 @@
         }
 
         function filterQuestions(category) {
-            // Update UI buttons
-            const buttons = document.querySelectorAll('.active-filter');
-            // Reset buttons (simple approach for this demo)
-            // Ideally, we maintain active class logic more robustly
-            // For now, re-render is fine.
             renderQuestions(category);
         }
 
-        // Initialize
         window.onload = () => {
             renderQuestions();
         };
